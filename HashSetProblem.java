@@ -24,10 +24,8 @@ public class Solution {
         for(int i=0;i<t;i++) {
 
             String str = pair_left[i] + " " + pair_right[i];
-            String str2 = pair_right[i] + " " + pair_left[i];
             set.add(str);
-            set.add(str2);
-            System.out.println(set.size()/2);
+            System.out.println(set.size());
         }
 
     }
