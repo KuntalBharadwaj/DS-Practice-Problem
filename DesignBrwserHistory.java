@@ -1,34 +1,51 @@
-class ParkingSystem {
+class BrowserHistory {
 
-    private int big;
-    private int medium;
-    private int small;
+    List<String> pages = new ArrayList<>();
+    int current;
 
-    public ParkingSystem(int big, int medium, int small) {
-        this.big = big;
-        this.medium = medium;
-        this.small = small;
+    private String homepage;
+
+    public BrowserHistory(String homepage) {
+        pages.add(homepage);
+        current = 0;
     }
 
-    public boolean addCar(int carType) {
-        if(carType == 1 && big > 0) {
-            big--;
-            return true;
+    public void visit(String url) {
+        while(current < pages.size()-1) {
+            pages.remove(pages.size()-1);
         }
-        else if(carType == 2 && medium > 0) {
-            medium--;
-            return true;
+
+        pages.add(url);
+        current++;
+    }
+
+    public String back(int steps) {
+        if((current - steps) >= 0) {
+            current -= steps;
+            return pages.get(current);
         }
-        else if(carType == 3 && small > 0) {
-            small--;
-            return true;
+        else {
+            current = 0;
+            return pages.get(current);
         }
-        else return false;
+    }
+
+    public String forward(int steps) {
+        if((current + steps) < pages.size()) {
+            current += steps;
+            return pages.get(current);
+        }
+        else {
+            current = pages.size()-1;
+            return pages.get(current);
+        }
     }
 }
 
 /**
- * Your ParkingSystem object will be instantiated and called as such:
- * ParkingSystem obj = new ParkingSystem(big, medium, small);
- * boolean param_1 = obj.addCar(carType);
+ * Your BrowserHistory object will be instantiated and called as such:
+ * BrowserHistory obj = new BrowserHistory(homepage);
+ * obj.visit(url);
+ * String param_2 = obj.back(steps);
+ * String param_3 = obj.forward(steps);
  */
